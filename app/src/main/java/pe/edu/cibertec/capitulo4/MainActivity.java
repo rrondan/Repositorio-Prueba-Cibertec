@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CONFIGURACION = 300;
     private static final int REQUEST_PERMISO_GALERIA = 400;
     private static final int REQUEST_ABRIR_GALERIA = 500;
-    private static final int REQUEST_GRABAR_VIDEO = 600;
+    private static final int REQUEST_GRABAR_VIDEO = 800;
 
     private ImageView imgFoto;
     private VideoView videoView;
