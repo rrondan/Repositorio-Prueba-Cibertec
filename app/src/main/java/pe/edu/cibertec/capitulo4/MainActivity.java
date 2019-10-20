@@ -31,7 +31,6 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -44,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CONFIGURACION = 300;
     private static final int REQUEST_PERMISO_GALERIA = 400;
     private static final int REQUEST_ABRIR_GALERIA = 500;
-    private static final int REQUEST_GRABAR_VIDEO = 600;
+    private static final int REQUEST_GRABAR_VIDEO = 700;
 
-    private ImageView imgFoto;
+    private ImageView imgFoto2;
     private VideoView videoView;
     private Button btnGrabarVideo;
     private Button btnTomarFoto;
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        imgFoto = findViewById(R.id.imgFoto);
+        imgFoto2 = findViewById(R.id.imgFoto);
         btnTomarFoto = findViewById(R.id.btnTomarFoto);
         btnAbrirGaleria = findViewById(R.id.btnAbrirGaleria);
         videoView = findViewById(R.id.videoView);
@@ -210,18 +209,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_TOMAR_FOTO && resultCode == RESULT_OK){
-            imgFoto.setVisibility(View.VISIBLE);
+            imgFoto2.setVisibility(View.VISIBLE);
             videoView.setVisibility(View.GONE);
             mostarImagen();
         }
         if(requestCode == REQUEST_ABRIR_GALERIA && resultCode == RESULT_OK){
-            imgFoto.setVisibility(View.VISIBLE);
+            imgFoto2.setVisibility(View.VISIBLE);
             videoView.setVisibility(View.GONE);
             Uri selectedImage = data.getData();
-            imgFoto.setImageURI(selectedImage);
+            imgFoto2.setImageURI(selectedImage);
         }
         if(requestCode == REQUEST_GRABAR_VIDEO && resultCode == RESULT_OK){
-            imgFoto.setVisibility(View.GONE);
+            imgFoto2.setVisibility(View.GONE);
             videoView.setVisibility(View.VISIBLE);
             Uri videoUri = data.getData();
             if(mediaController == null){
@@ -236,8 +235,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void mostarImagen(){
         //Obtener las dimensiones de nuestro imageview
-        int targetW = imgFoto.getWidth();
-        int targetH = imgFoto.getHeight();
+        int targetW = imgFoto2.getWidth();
+        int targetH = imgFoto2.getHeight();
         //Obtener las dimensiones del bitmap
         BitmapFactory.Options bmpOptions = new BitmapFactory.Options();
         bmpOptions.inJustDecodeBounds = true;
@@ -254,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             rotado = rotarSiSeRequiere(bitmap);
         }
-        imgFoto.setImageBitmap(rotado);
+        imgFoto2.setImageBitmap(rotado);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
